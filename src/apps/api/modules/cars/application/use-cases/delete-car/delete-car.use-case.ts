@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { ICarsRepository, IDeleteCarUseCase } from '../../contracts';
+import { ICarsRepository } from '@shared/infrastructure/database/repositories/cars/cars.repository.contract';
+import { IDeleteCarUseCase } from './delete-car.use-case.contract';
 
 @Injectable()
 export class DeleteCarUseCase implements IDeleteCarUseCase {

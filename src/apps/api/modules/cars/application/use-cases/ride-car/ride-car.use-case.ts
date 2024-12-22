@@ -1,6 +1,7 @@
-import { Injectable, Inject, NotFoundException } from '@nestjs/common';
 import { Car } from '@domain/cars/car.entity';
-import { IRideCarUseCase, ICarsRepository } from '../../contracts';
+import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { ICarsRepository } from '@shared/infrastructure/database/repositories/cars/cars.repository.contract';
+import { IRideCarUseCase } from './ride-car.use-case.contract';
 
 @Injectable()
 export class RideCarUseCase implements IRideCarUseCase {

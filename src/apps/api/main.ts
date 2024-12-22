@@ -1,10 +1,10 @@
-import 'dotenv/config';
-import { NestFactory } from '@nestjs/core';
 import { Logger } from '@nestjs/common';
+import { NestFactory } from '@nestjs/core';
 import { DocumentBuilder } from '@nestjs/swagger';
-import { CoreModule } from './modules/core/core.module';
-import { AppConfig } from './modules/configuration/configs/app';
 import { setupOpenApiReference } from '@shared/utility/open-api/setup-open-api';
+import 'dotenv/config';
+import { AppConfig } from './modules/configuration/app';
+import { CoreModule } from './modules/core/core.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(CoreModule);
