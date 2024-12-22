@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { DrizzleModule } from './drizzle';
 import { Pool } from 'pg';
 import { databaseSchema } from './schemas';
-import { DatabaseConfig } from '../../configurations/configs/database';
+import { DatabaseConfig } from './configs';
 import { REPOSITORIES } from './repositories';
 
 @Module({

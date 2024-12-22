@@ -1,21 +1,25 @@
 import { Module } from '@nestjs/common';
-import { CarsControllerV1 } from './presenters/http/cars.controller.v1';
+import { DatabaseModule } from '@shared/infrastructure/database/database.module';
 import {
   CREATE_CAR_USE_CASE_PROVIDER,
   DELETE_CAR_USE_CASE_PROVIDER,
   GET_CARS_USE_CASE_PROVIDER,
   RIDE_CAR_USE_CASE_PROVIDER,
-} from './application/use-cases';
-import { DatabaseModule } from '@shared/infrastructure/database/database.module';
+} from './use-cases';
 
 @Module({
-  controllers: [CarsControllerV1],
   providers: [
     CREATE_CAR_USE_CASE_PROVIDER,
-    DELETE_CAR_USE_CASE_PROVIDER,
     GET_CARS_USE_CASE_PROVIDER,
+    DELETE_CAR_USE_CASE_PROVIDER,
     RIDE_CAR_USE_CASE_PROVIDER,
   ],
   imports: [DatabaseModule],
+  exports: [
+    CREATE_CAR_USE_CASE_PROVIDER,
+    GET_CARS_USE_CASE_PROVIDER,
+    DELETE_CAR_USE_CASE_PROVIDER,
+    RIDE_CAR_USE_CASE_PROVIDER,
+  ],
 })
 export class CarsModule {}

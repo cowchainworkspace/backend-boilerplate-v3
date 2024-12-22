@@ -1,12 +1,13 @@
+import 'dotenv/config';
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { AppConfig } from '../../shared/configurations/configs/app';
 import { Logger } from '@nestjs/common';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { apiReference } from '@scalar/nestjs-api-reference';
+import { DocumentBuilder } from '@nestjs/swagger';
+import { CoreModule } from './modules/core/core.module';
+import { AppConfig } from './modules/configuration/configs/app';
+import { setupOpenApiReference } from '@shared/utility/open-api/setup-open-api';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(CoreModule);
 
   const config = new DocumentBuilder()
     .setTitle('Cars example')
@@ -14,18 +15,7 @@ async function bootstrap() {
     .setVersion('1.0.0')
     .addTag('cars')
     .build();
-
-  const document = SwaggerModule.createDocument(app, config);
-
-  app.use(
-    '/reference',
-    apiReference({
-      theme: 'purple',
-      spec: {
-        content: document,
-      },
-    }),
-  );
+  setupOpenApiReference(app, config);
 
   const logger = new Logger('App');
 

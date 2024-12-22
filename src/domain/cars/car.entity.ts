@@ -1,0 +1,29 @@
+import { TClassProperties } from '@shared/types/utils';
+import { TCarModel } from '@shared/infrastructure/database/schemas';
+
+export class Car {
+  id?: string;
+  model: string;
+  ridesCount: number;
+
+  constructor(properties: TClassProperties<Car>) {
+    Object.assign(this, properties);
+  }
+
+  public toDatabaseModel(): TCarModel {
+    return {
+      id: this.id!,
+      model: this.model,
+      ridesCount: this.ridesCount,
+    };
+  }
+
+  public static fromDatabaseModel(model: TCarModel): Car {
+    return new Car({ ...model });
+  }
+
+  ride() {
+    console.log('Car is riding... 🚕');
+    this.ridesCount += 1;
+  }
+}
