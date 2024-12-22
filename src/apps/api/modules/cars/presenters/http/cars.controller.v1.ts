@@ -9,10 +9,13 @@ import {
 } from '@nestjs/common';
 import { ApiResponse } from '@nestjs/swagger';
 
-import { ICreateCarUseCase } from '../../application/use-cases/create-car/create-car.use-case.contract';
-import { IDeleteCarUseCase } from '../../application/use-cases/delete-car/delete-car.use-case.contract';
-import { IGetCarsUseCase } from '../../application/use-cases/get-cars/get-cars.use-case.contract';
-import { IRideCarUseCase } from '../../application/use-cases/ride-car/ride-car.use-case.contract';
+import {
+  ICreateCarUseCase,
+  IGetCarsUseCase,
+  IDeleteCarUseCase,
+  IRideCarUseCase,
+} from '../../application/use-cases';
+
 import {
   CreateCarCommand,
   DeleteCarCommand,
