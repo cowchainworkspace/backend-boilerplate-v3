@@ -1,23 +1,25 @@
 import {
-  Controller,
-  Post,
   Body,
-  Get,
+  Controller,
   Delete,
-  ParseUUIDPipe,
+  Get,
   Param,
+  ParseUUIDPipe,
+  Post,
 } from '@nestjs/common';
 import { ApiResponse } from '@nestjs/swagger';
+
 import {
   ICreateCarUseCase,
   IGetCarsUseCase,
   IDeleteCarUseCase,
   IRideCarUseCase,
-} from '../../application/contracts';
+} from '../../application/use-cases';
+
 import {
   CreateCarCommand,
-  GetCarsQuery,
   DeleteCarCommand,
+  GetCarsQuery,
   RideCarCommand,
 } from './dto';
 

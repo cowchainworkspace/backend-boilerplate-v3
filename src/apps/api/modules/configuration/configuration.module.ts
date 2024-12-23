@@ -1,9 +1,10 @@
 import { Global, Module } from '@nestjs/common';
-import { CONFIGS } from './configs';
+import { AppConfig } from './app';
+import { DatabaseConfig } from '@shared/infrastructure/database/configs';
 
 @Global()
 @Module({
-  providers: [...CONFIGS],
-  exports: [...CONFIGS],
+  providers: [AppConfig, DatabaseConfig],
+  exports: [AppConfig, DatabaseConfig],
 })
 export class ConfigurationModule {}

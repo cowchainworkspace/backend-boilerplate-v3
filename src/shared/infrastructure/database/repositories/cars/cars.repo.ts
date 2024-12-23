@@ -1,9 +1,9 @@
+import { Car } from '@domain/cars/car.entity';
 import { Injectable } from '@nestjs/common';
 import { BaseRepository } from '@shared/infrastructure/database/repositories/core';
 import { cars } from '@shared/infrastructure/database/schemas';
 import { eq, sql } from 'drizzle-orm';
-import { ICarsRepository } from '@apps/api/modules/cars/application/contracts';
-import { Car } from '@domain/cars/car.entity';
+import { ICarsRepository } from './cars.repository.contract';
 
 @Injectable()
 export class CarsRepository extends BaseRepository implements ICarsRepository {
