@@ -21,7 +21,7 @@ export class DatabaseHealthService {
 
       if (!isHealthy) {
         return indicator.down({
-          message: 'Database is not healthy',
+          message: 'Database is not connected',
         });
       }
 
@@ -33,7 +33,7 @@ export class DatabaseHealthService {
         });
       } else {
         return indicator.down({
-          message: 'Database is not healthy',
+          message: 'Database is not connected',
         });
       }
     }
