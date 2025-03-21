@@ -1,6 +1,13 @@
-import { IsEnum, IsNumber } from 'class-validator';
-import { AppEnvironment } from '@shared/types';
 import { Config } from '@libs/configuration';
+import { AppEnvironment } from '@shared/types';
+import {
+  IsEnum,
+  IsNumber,
+  IsString,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
+import { staticConfig } from '../static';
 
 @Config()
 export class AppConfig {
@@ -9,4 +16,14 @@ export class AppConfig {
 
   @IsEnum(AppEnvironment)
   mode: AppEnvironment = process.env.ENVIRONMENT as AppEnvironment;
+
+  @IsString()
+  @MinLength(3)
+  @MaxLength(50)
+  appName: string = staticConfig.APP_NAME;
+
+  @IsString()
+  @MinLength(3)
+  @MaxLength(150)
+  description: string = staticConfig.APP_DESCRIPTION;
 }
