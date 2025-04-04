@@ -1,12 +1,15 @@
 import { Module } from '@nestjs/common';
-import { DrizzleModule } from './drizzle';
+import { TerminusModule } from '@nestjs/terminus';
 import { Pool } from 'pg';
-import { databaseSchema } from './schemas';
 import { DatabaseConfig } from './configs';
+import { DrizzleModule } from './drizzle';
+import { DatabaseHealthService } from './health/health.service';
 import { REPOSITORIES } from './repositories';
+import { databaseSchema } from './schemas';
 
 @Module({
   imports: [
+    TerminusModule,
     DrizzleModule.registerAsync({
       inject: [DatabaseConfig],
       useFactory: (databaseConfig: DatabaseConfig) => {
@@ -17,7 +20,7 @@ import { REPOSITORIES } from './repositories';
       },
     }),
   ],
-  providers: REPOSITORIES,
-  exports: REPOSITORIES,
+  providers: [DatabaseHealthService, ...REPOSITORIES],
+  exports: [DatabaseHealthService, ...REPOSITORIES],
 })
 export class DatabaseModule {}
