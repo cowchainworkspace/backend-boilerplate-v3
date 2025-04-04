@@ -9,17 +9,17 @@ import { CoreModule } from './modules/core/core.module';
 async function bootstrap() {
   const app = await NestFactory.create(CoreModule);
 
+  const logger = new Logger('App');
+
+  const appConfig = app.get(AppConfig);
+
   const config = new DocumentBuilder()
-    .setTitle('Cars example')
-    .setDescription('The cars API description')
+    .setTitle(appConfig.appName)
+    .setDescription(appConfig.description)
     .setVersion('1.0.0')
     .addTag('cars')
     .build();
   setupOpenApiReference(app, config);
-
-  const logger = new Logger('App');
-
-  const appConfig = app.get(AppConfig);
 
   await app.listen(appConfig.port, '0.0.0.0', async () =>
     logger.log(`App "API" successfully started on ${await app.getUrl()}`),
