@@ -1,8 +1,10 @@
-import { Car } from '@domain/cars/car.entity';
 import { Injectable } from '@nestjs/common';
+
+import { Car } from '@domain/cars/car.entity';
 import { BaseRepository } from '@shared/infrastructure/database/repositories/core';
 import { cars } from '@shared/infrastructure/database/schemas';
 import { eq, sql } from 'drizzle-orm';
+
 import { ICarsRepository } from './cars.repository.contract';
 
 @Injectable()
@@ -15,16 +17,13 @@ export class CarsRepository extends BaseRepository implements ICarsRepository {
   }
 
   async create({ model }: { model: string }): Promise<Car> {
-    const [car] = await this._drizzle
-      .insert(cars)
-      .values({ model })
-      .returning();
+    const [car] = await this._drizzle.insert(cars).values({ model }).returning();
     return Car.fromDatabaseModel(car);
   }
 
   async getAll(): Promise<Car[]> {
     const allCars = await this._drizzle.select().from(cars);
-    return allCars.map((car) => Car.fromDatabaseModel(car));
+    return allCars.map(car => Car.fromDatabaseModel(car));
   }
 
   async delete(id: string): Promise<void> {

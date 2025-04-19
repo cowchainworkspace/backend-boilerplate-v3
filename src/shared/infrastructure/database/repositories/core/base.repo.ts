@@ -1,7 +1,9 @@
 import { Inject, Injectable } from '@nestjs/common';
+
+import { NodePgDatabase } from 'drizzle-orm/node-postgres';
+
 import { DRIZZLE_DATASOURCE_PROVIDER_TOKEN } from '../../drizzle/constants/injection-tokens';
 import { TDatabaseSchema } from '../../schemas';
-import { NodePgDatabase } from 'drizzle-orm/node-postgres';
 
 @Injectable()
 export class BaseRepository {

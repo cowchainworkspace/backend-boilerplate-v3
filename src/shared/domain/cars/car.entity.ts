@@ -1,5 +1,5 @@
-import { TClassProperties } from '@shared/types/utils';
 import { TCarModel } from '@shared/infrastructure/database/schemas';
+import { TClassProperties } from '@shared/types/utils';
 
 export class Car {
   id?: string;

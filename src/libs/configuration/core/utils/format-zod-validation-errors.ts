@@ -1,12 +1,9 @@
 import { ZodIssue } from 'zod';
 
-export const formatZodValidationErrors = (
-  errors: ZodIssue[],
-  configName?: string,
-): string[] => {
+export const formatZodValidationErrors = (errors: ZodIssue[], configName?: string): string[] => {
   const groupedByTarget = new Map<string, string[]>();
 
-  errors.forEach((error) => {
+  errors.forEach(error => {
     const targetName = configName || 'UnknownConfig';
     const property = error.path.join('.');
     const constraint = error.message;
@@ -20,7 +17,6 @@ export const formatZodValidationErrors = (
     }
   });
 
-  // Format grouped errors for output
   const formattedErrors: string[] = [];
   groupedByTarget.forEach((errors, target) => {
     formattedErrors.push(`[${target}]\n${errors.join('\n')}`);
