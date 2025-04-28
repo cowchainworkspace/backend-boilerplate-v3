@@ -1,5 +1,6 @@
 import { INestApplication } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+
 import { apiReference } from '@scalar/nestjs-api-reference';
 
 export const setupOpenApiReference = (

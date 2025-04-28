@@ -1,5 +1,5 @@
-import { IsNotEmpty } from 'class-validator';
 import { Config } from '@libs/configuration';
+import { IsNotEmpty } from 'class-validator';
 
 @Config()
 export class DatabaseConfig {

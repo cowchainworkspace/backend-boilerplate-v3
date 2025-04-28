@@ -1,27 +1,13 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  ParseUUIDPipe,
-  Post,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseUUIDPipe, Post } from '@nestjs/common';
 import { ApiResponse } from '@nestjs/swagger';
 
 import {
   ICreateCarUseCase,
-  IGetCarsUseCase,
   IDeleteCarUseCase,
+  IGetCarsUseCase,
   IRideCarUseCase,
 } from '../../application/use-cases';
-
-import {
-  CreateCarCommand,
-  DeleteCarCommand,
-  GetCarsQuery,
-  RideCarCommand,
-} from './dto';
+import { CreateCarCommand, DeleteCarCommand, GetCarsQuery, RideCarCommand } from './dto';
 
 @Controller('v1/cars')
 export class CarsControllerV1 {
@@ -35,9 +21,7 @@ export class CarsControllerV1 {
 
   @Post()
   @ApiResponse({ type: CreateCarCommand.Response })
-  async createCar(
-    @Body() request: CreateCarCommand.Request,
-  ): Promise<CreateCarCommand.Response> {
+  async createCar(@Body() request: CreateCarCommand.Request): Promise<CreateCarCommand.Response> {
     const car = await this._createCarUseCase.execute({ model: request.model });
 
     return car.toDatabaseModel();
@@ -49,7 +33,7 @@ export class CarsControllerV1 {
     const cars = await this._getCarsUseCase.execute();
 
     return {
-      cars: cars.map((car) => car.toDatabaseModel()),
+      cars: cars.map(car => car.toDatabaseModel()),
     };
   }
 

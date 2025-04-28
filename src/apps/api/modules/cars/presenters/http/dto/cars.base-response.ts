@@ -1,5 +1,6 @@
-import { TCarModel } from '@shared/infrastructure/database/schemas';
 import { ApiProperty } from '@nestjs/swagger';
+
+import { TCarModel } from '@shared/infrastructure/database/schemas';
 import { IsInt, IsPositive, IsString } from 'class-validator';
 
 export class CarBaseResponse {

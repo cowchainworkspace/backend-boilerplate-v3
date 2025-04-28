@@ -1,12 +1,7 @@
 import { Config } from '@libs/configuration';
 import { AppEnvironment } from '@shared/types';
-import {
-  IsEnum,
-  IsNumber,
-  IsString,
-  MaxLength,
-  MinLength,
-} from 'class-validator';
+import { IsEnum, IsNumber, IsString, MaxLength, MinLength } from 'class-validator';
+
 import { staticConfig } from '../static';
 
 @Config()

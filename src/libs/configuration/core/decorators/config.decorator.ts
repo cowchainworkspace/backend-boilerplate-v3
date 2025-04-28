@@ -1,4 +1,5 @@
 import { validateSync } from 'class-validator';
+
 import { formatConfigValidationErrors } from '../utils';
 
 export function Config() {
@@ -12,13 +13,8 @@ export function Config() {
         });
 
         if (errors.length) {
-          const groupedErrors = formatConfigValidationErrors(
-            errors,
-            constructor.name,
-          );
-          throw new Error(
-            `Configuration validation errors:\n${groupedErrors.join('\n\n')}`,
-          );
+          const groupedErrors = formatConfigValidationErrors(errors, constructor.name);
+          throw new Error(`Configuration validation errors:\n${groupedErrors.join('\n\n')}`);
         }
       }
     };

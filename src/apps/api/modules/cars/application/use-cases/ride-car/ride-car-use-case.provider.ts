@@ -1,4 +1,5 @@
 import { Provider } from '@nestjs/common';
+
 import { RideCarUseCase } from './ride-car.use-case';
 import { IRideCarUseCase } from './ride-car.use-case.contract';
 

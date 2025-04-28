@@ -6,12 +6,12 @@ export const formatConfigValidationErrors = (
 ): string[] => {
   const groupedByTarget = new Map<string, string[]>();
 
-  errors.forEach((error) => {
+  errors.forEach(error => {
     const targetName = configName || 'UnknownConfig';
     const property = error.property;
     const constraints = error.constraints
       ? Object.values(error.constraints)
-          .map((msg) => `  - ${msg}`)
+          .map(msg => `  - ${msg}`)
           .join('\n')
       : '';
 
@@ -24,7 +24,6 @@ export const formatConfigValidationErrors = (
     }
   });
 
-  // Format grouped errors for output
   const formattedErrors: string[] = [];
   groupedByTarget.forEach((errors, target) => {
     formattedErrors.push(`[${target}]\n${errors.join('\n')}`);

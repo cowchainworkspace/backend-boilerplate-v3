@@ -1,6 +1,8 @@
 import { Global, Module } from '@nestjs/common';
-import { AppConfig } from './app';
+
 import { DatabaseConfig } from '@shared/infrastructure/database/configs';
+
+import { AppConfig } from './app';
 
 @Global()
 @Module({
