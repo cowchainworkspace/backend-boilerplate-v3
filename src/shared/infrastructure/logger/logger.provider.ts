@@ -17,7 +17,7 @@ export const loggerProvider: Provider = {
 
     const isProduction = appConfig.mode === AppEnvironment.PRODUCTION;
     const logLevel = isProduction ? 'info' : 'debug';
-    const shouldUseNewLines = false;
+    const shouldUseNewLines = appConfig.useNewLinesInLogger ?? false;
 
     const consoleFormat = combine(
       colorize({ all: true }),
