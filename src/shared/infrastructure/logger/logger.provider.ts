@@ -17,6 +17,7 @@ export const loggerProvider: Provider = {
 
     const isProduction = appConfig.mode === AppEnvironment.PRODUCTION;
     const logLevel = isProduction ? 'info' : 'debug';
+    const shouldUseNewLines = false;
 
     const consoleFormat = combine(
       colorize({ all: true }),
@@ -30,10 +31,17 @@ export const loggerProvider: Provider = {
 
         result += `${level}: ${message}`;
 
-        if (Object.keys(metadata).length > 0 && metadata.service) {
+        if (typeof metadata === 'string') {
+          result += ` ${metadata}`;
+        } else if (Object.keys(metadata).length > 0 && metadata.service) {
+          // eslint-disable-next-line @typescript-eslint/naming-convention
           const { service, _, version, ...rest } = metadata;
           if (Object.keys(rest).length > 0) {
-            result += `\n${JSON.stringify(rest, null, 2)}`;
+            if (shouldUseNewLines) {
+              result += `\n${JSON.stringify(rest, null, 2)}`;
+            } else {
+              result += ` ${JSON.stringify(rest)}`;
+            }
           }
         }
 
@@ -75,6 +83,7 @@ export const loggerProvider: Provider = {
           fs.mkdirSync(logDir, { recursive: true });
         }
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.warn(`Could not create log directory: ${logDir}`);
       }
     }

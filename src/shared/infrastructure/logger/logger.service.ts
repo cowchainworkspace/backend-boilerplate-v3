@@ -64,7 +64,7 @@ export class Logger implements LoggerService {
     this.log(level, message, metadata);
   }
 
-  private _formatMessage(message: any): string {
+  private _formatMessage(message: unknown): string {
     if (message === undefined || message === null) {
       return '';
     }
@@ -108,14 +108,20 @@ export class Logger implements LoggerService {
       'credentials',
     ];
 
-    Object.keys(metadata).forEach(key => {
+    const entries = Object.entries(metadata);
+    for (const [key, value] of entries) {
       const lowerCaseKey = key.toLowerCase();
 
       if (sensitiveFields.some(field => lowerCaseKey.includes(field))) {
-        metadata[key] = '[REDACTED]';
-      } else if (typeof metadata[key] === 'object' && metadata[key] !== null) {
-        this._redactSensitiveData(metadata[key]);
+        Object.defineProperty(metadata, key, {
+          value: '[REDACTED]',
+          writable: true,
+          enumerable: true,
+          configurable: true,
+        });
+      } else if (typeof value === 'object' && value !== null) {
+        this._redactSensitiveData(value as ILoggerMetadata);
       }
-    });
+    }
   }
 }
