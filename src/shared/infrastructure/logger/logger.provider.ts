@@ -2,6 +2,7 @@ import { Provider } from '@nestjs/common';
 
 import { AppConfig } from '@apps/api/modules/configuration/app';
 import { AppEnvironment } from '@shared/types';
+import { isString } from 'class-validator';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as winston from 'winston';
@@ -31,7 +32,7 @@ export const loggerProvider: Provider = {
 
         result += `${level}: ${message}`;
 
-        if (typeof metadata === 'string') {
+        if (isString(metadata)) {
           result += ` ${metadata}`;
         } else if (Object.keys(metadata).length > 0 && metadata.service) {
           // eslint-disable-next-line @typescript-eslint/naming-convention
