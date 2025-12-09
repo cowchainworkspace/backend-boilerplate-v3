@@ -1,6 +1,6 @@
 import { Config } from '@libs/configuration';
 import { AppEnvironment } from '@shared/types';
-import { IsEnum, IsNumber, IsString, MaxLength, MinLength } from 'class-validator';
+import { IsBoolean, IsEnum, IsNumber, IsString, MaxLength, MinLength } from 'class-validator';
 
 import { staticConfig } from '../static';
 
@@ -21,4 +21,7 @@ export class AppConfig {
   @MinLength(3)
   @MaxLength(150)
   description: string = staticConfig.APP_DESCRIPTION;
+
+  @IsBoolean()
+  useNewLinesInLogger: boolean = false;
 }

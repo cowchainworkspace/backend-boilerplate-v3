@@ -15,7 +15,7 @@ export enum LogLevel {
 }
 
 export interface ILoggerMetadata {
-  [key: string]: any;
+  [key: string]: unknown;
   correlationId?: string;
   service?: string;
   version?: string;
